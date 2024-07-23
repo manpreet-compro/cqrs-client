@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Membership</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <section class="max-w-md mx-auto bg-white shadow-md rounded-lg p-8 mt-12">
+        <h1 class="text-2xl font-semibold text-gray-800">Class Membership</h1>
+        <p class="text-sm text-gray-600 mb-5">
+            Update the Class Memberships by submitting a command.
+        </p>
+        <form id="classForm" action="#" method="POST" class="space-y-4">
+            <!-- Class ID Input -->
+            <div>
+                <label for="classId" class="block text-sm font-medium text-gray-700">Class id</label>
+                <input type="text" name="classId" id="classId" required 
+                       class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+
+            <!-- Command Radio Box -->
+            <fieldset>
+                <legend class="block text-sm font-medium text-gray-700">Command</legend>
+                <div class="mt-2 space-y-2">
+                    <div class="flex items-center">
+                        <input type="radio" id="inc" name="cmd" value="inc" 
+                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                        <label for="inc" class="ml-2 block text-sm text-gray-700">inc</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="dec" name="cmd" value="dec" 
+                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                        <label for="dec" class="ml-2 block text-sm text-gray-700">dec</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" 
+                        class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                    Submit
+                </button>
+            </div>
+        </form>
+
+        <!-- Result Messages -->
+        <div id="result" class="mt-4 hidden fade-in bg-green-50 border border-green-400 text-green-700 px-4 py-3 rounded-lg" role="alert">
+            <p id="commandStatus" class="font-semibold"></p>
+            <p id="studentCount" class="text-sm mt-1"></p>
+        </div>
+    </section>
+
+    <script>
+        // JavaScript to handle form submission and display result
+        document.getElementById('classForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Get form values
+            const classId = document.getElementById('classId').value;
+            const cmd = document.querySelector('input[name="cmd"]:checked').value;
+
+            // Simulate form processing
+            const resultElement = document.getElementById('result');
+            resultElement.classList.remove('hidden');
+            resultElement.classList.add('visible'); // Add visible class for transition effect
+
+            // Display command submitted message
+            document.getElementById('commandStatus').innerText = `Command '${cmd}' submitted for Class ID: ${classId}`;
+
+            // Simulate fetching the total number of students (for example purposes, we'll use a static value)
+            const totalStudents = 42; // Replace with actual logic if needed
+
+            // Update the student count after a delay
+            setTimeout(function () {
+                document.getElementById('studentCount').innerText = `Total students in class: ${totalStudents}`;
+            }, 1500); // Display after 1.5 seconds delay
+        });
+    </script>
+</body>
+</html>
